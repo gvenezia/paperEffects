@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Circle</title>
+
+	<script type="text/javascript" src="paper-full.min.js"></script>
+
+	<!-- local CSS -->
+	<link rel="stylesheet" type="text/css" href="circle.css">
+
+	<!-- Define inlined PaperScript associate it with myCanvas -->
+	<script type="text/paperscript" canvas="myCanvas">
+
+	//Generates a field of dots  -->
+	// set the initial x and y coordinates  -->
+	var x = -30;
+	var y = 0;
+	var circles = [];
+
+	// Make a row of dots -->
+	function makeDotRow() {
+		for (var i = 0; i < 30; i++){
+			circles[i] = new Path.Circle(new Point(x, y), Math.random() * 10);
+			// <!-- Utilize different values  -->
+			// <!-- For example making the colors factors of x or y will give you a gradient -->
+			// <!-- Use modulo % for repeating gradients -->
+			circles[i].fillColor = new Color(Math.random(), Math.random(), Math.random(), Math.random()); 
+			
+			// <!-- Increment the x position -->
+			x += (Math.random() * 150) ;
+		}
+	}
+	// <!-- j < (# number of rows you want) -->
+	for (var j = 0; j < 800; j++) {
+		makeDotRow();
+		// <!-- Afer each row of dots, reset x, and increment the y position -->
+		x = -30;
+		y += Math.random() * 2.5;	
+	}
+
+// Animations usually require too much heavy lifting
+	// // gradually change the hue of the circles
+	// function onFrame(event) {
+	// 	for(var i = 0; i < circles.length; i++){
+	// 		circles[i].fillColor.hue += 5;
+	// 	}
+	// }	
+
+	</script>
+</head>
+<body>
+	<canvas id="myCanvas" resize></canvas>
+</body>
+</html>

@@ -11,35 +11,34 @@
 	<!-- Define inlined PaperScript associate it with myCanvas -->
 	<script type="text/paperscript" canvas="myCanvas">
 	
-	<!-- Generates a field of dots  -->
-	<!-- set the initial x and y coordinates  -->
-	var x = -30;
-	var y = 0;
-
+	// Create an array to store circles for manipulations
 	var circles = [];
 
-	<!-- Make a row of dots -->
-	function makeDotRow() {
-		for (var i = 0; i < 30; i++){
-			circles[i] = new Path.Circle(new Point(x, y), Math.random() * 5);
+	makeDotGrid();
 
-			<!-- Utilize different values  -->
-			<!-- For example making the colors factors of x or y will give you a gradient -->
-			<!-- Use modulo % for repeating gradients -->
-			circles[i].fillColor = new Color(Math.random(), Math.random(), Math.random(), Math.random()); 
-			
-			<!-- Increment the x position -->
-			x += (Math.random() * 100) ;
+	// gradually change the hue of the circles
+	function onFrame(event) {
+		for(var i = 0; i < circles.length; i++){
+			circles[i].fillColor.hue += 5;
 		}
-	}
+	}	
 
-	<!-- j < (# number of rows you want) -->
-	for (var j = 0; j < 1000; j++) {
-		makeDotRow();
+	// Generates a field of dots  
+	function makeDotGrid() {
+		for (var x = 0; x < 1000; x += Math.random() * 50){
+			// j < (# number of rows you want) 
+			for (var y = 0; y < 1000; y += Math.random() * 50) {
+				var newCircle = new Path.Circle(new Point(x, y), Math.random() * 20);
 
-		<!-- Afer each row of dots, reset x, and increment the y position -->
-		x = -30;
-		y += Math.random() * 2;	
+				// Utilize different values  -->
+				// For example making the colors factors of x or y will give you a gradient -->
+				// Use modulo % for repeating gradients -->
+				newCircle.fillColor = new Color(Math.random(), Math.random(), Math.random(), Math.random() * 1 );
+
+				// Push the new circle onto the circles array
+				circles.push(newCircle);
+			}
+		}
 	}
 
 	</script>
