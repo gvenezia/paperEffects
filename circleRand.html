@@ -8,43 +8,72 @@
 	<!-- local CSS -->
 	<link rel="stylesheet" type="text/css" href="circle.css">
 
-	<!-- Define inlined PaperScript associate it with myCanvas -->
+	<!-- Define inlined PaperScript and link it to #myCanvas in body element -->
 	<script type="text/paperscript" canvas="myCanvas">
 
-	//Generates a field of dots  -->
-	// set the initial x and y coordinates  -->
+//Generates a field of dots  
+// Alter the variables to change the parameters of the resulting grid
+// for function variables, change the return value
+
+	// set the initial x and y coordinates 
 	var x = -30;
 	var y = 0;
-	var circles = [];
 
-	// Make a row of dots -->
+	// Grid
+		// Number of rows
+		var rowNum = 100;
+		var circlesPerRow = 50;
+		var xIncrement = function() {return Math.random() * 50;};
+		var yIncrement = function() {return Math.random() * 25;};
+
+	// Circles
+		// Array
+		var circles = [];
+		// counter for number of circles
+		circleNum = 0;
+
+		// Size
+		var circleWidth = function() {return Math.random() * 20;};;
+
+		// Color (for each, set the return value to something between 0 and 1. 0 being none)
+		var redAmount = function() {return Math.random();};
+		var greenAmount = function() {return Math.random();};
+		var blueAmount = function() {return Math.random();};
+		var opacity = function() {return Math.random();};
+
+	// j < (# number of rows you want) 
+	for (var j = 0; j < rowNum; j++) {
+		makeDotRow();
+		// Afer each row of dots, reset x, and increment the y position 
+		x = -30;
+		y += yIncrement();	
+	}
+
+	// Make a row of dots 
 	function makeDotRow() {
-		for (var i = 0; i < 30; i++){
-			circles[i] = new Path.Circle(new Point(x, y), Math.random() * 10);
-			// <!-- Utilize different values  -->
-			// <!-- For example making the colors factors of x or y will give you a gradient -->
-			// <!-- Use modulo % for repeating gradients -->
-			circles[i].fillColor = new Color(Math.random(), Math.random(), Math.random(), Math.random()); 
+		for (var i = 0; i < circlesPerRow; i++){
+			// Create a new circle
+			circles[circleNum] = new Path.Circle(new Point(x, y), circleWidth());
+			// fill the circle
+			circles[circleNum].fillColor = new Color(redAmount(), greenAmount(), blueAmount(), opacity()); 
 			
-			// <!-- Increment the x position -->
-			x += (Math.random() * 150) ;
+			// Increment the x position and number of circles
+			x += xIncrement() ;
+			circleNum++;
 		}
 	}
-	// <!-- j < (# number of rows you want) -->
-	for (var j = 0; j < 800; j++) {
-		makeDotRow();
-		// <!-- Afer each row of dots, reset x, and increment the y position -->
-		x = -30;
-		y += Math.random() * 2.5;	
-	}
+	
 
-// Animations usually require too much heavy lifting
-	// // gradually change the hue of the circles
-	// function onFrame(event) {
-	// 	for(var i = 0; i < circles.length; i++){
-	// 		circles[i].fillColor.hue += 5;
-	// 	}
-	// }	
+	// Animations usually require too much heavy lifting (hence initial comment out)
+		// Animations
+		// function onFrame(event) {
+		// 	for(var i = 0; i < circleNum; i++){
+		// 		// gradually change the hue of the circles
+		// 		circles[i].fillColor.hue += 5;
+		// 		// shrink the circles
+		// 		circles[i].scale(.95);
+		// 	}
+		// }	
 
 	</script>
 </head>

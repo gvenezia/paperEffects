@@ -16,10 +16,13 @@
 
 	makeDotGrid();
 
-	// gradually change the hue of the circles
+	// Animations
 	function onFrame(event) {
 		for(var i = 0; i < circles.length; i++){
+			// gradually change the hue of the circles
 			circles[i].fillColor.hue += 5;
+			// shrink the circles
+			circles[i].scale(.95);
 		}
 	}	
 
