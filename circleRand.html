@@ -14,7 +14,8 @@
 //Generates a field of dots  
 // Alter the variables to change the parameters of the resulting grid
 // for function variables, change the return value
-
+	
+	// =============== Configurable Variables =============== 
 	// set the initial x and y coordinates 
 	var x = -30;
 	var y = 0;
@@ -42,16 +43,17 @@
 		var opacity = function() {return Math.random();};
 
 	// j < (# number of rows you want) 
-	for (var j = 0; j < rowNum; j++) {
+	for (let j = 0; j < rowNum; j++) {
 		makeDotRow();
 		// Afer each row of dots, reset x, and increment the y position 
 		x = -30;
 		y += yIncrement();	
 	}
 
+	// =============== Generate the Grid =============== 
 	// Make a row of dots 
 	function makeDotRow() {
-		for (var i = 0; i < circlesPerRow; i++){
+		for (let i = 0; i < circlesPerRow; i++){
 			// Create a new circle
 			circles[circleNum] = new Path.Circle(new Point(x, y), circleWidth());
 			// fill the circle
@@ -63,8 +65,10 @@
 		}
 	}
 	
-
+	// =============== Animations  =============== 
 	// Animations usually require too much heavy lifting (hence initial comment out)
+	// If you are going to use them, first try using very few circles above, 
+	// then gradually add more until you start to notice lag
 		// Animations
 		// function onFrame(event) {
 		// 	for(var i = 0; i < circleNum; i++){

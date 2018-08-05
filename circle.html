@@ -18,7 +18,7 @@
 
 	// Animations
 	function onFrame(event) {
-		for(var i = 0; i < circles.length; i++){
+		for(let i = 0; i < circles.length; i++){
 			// gradually change the hue of the circles
 			circles[i].fillColor.hue += 5;
 			// shrink the circles
@@ -28,9 +28,9 @@
 
 	// Generates a field of dots  
 	function makeDotGrid() {
-		for (var x = 0; x < 1000; x += Math.random() * 50){
+		for (let x = 0; x < 1000; x += Math.random() * 50){
 			// j < (# number of rows you want) 
-			for (var y = 0; y < 1000; y += Math.random() * 50) {
+			for (let y = 0; y < 1000; y += Math.random() * 50) {
 				var newCircle = new Path.Circle(new Point(x, y), Math.random() * 20);
 
 				// Utilize different values  -->
